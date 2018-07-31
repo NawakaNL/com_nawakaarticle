@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+
+	<name>Nawaka Article</name>
+	<!-- The following elements are optional and free of formatting constraints -->
+	<creationDate>5 juli 2018</creationDate>
+	<author>Tristan de Boer</author>
+	<authorEmail>info@tristandeboer.nl</authorEmail>
+	<authorUrl>http://www.tristandeboer.nl</authorUrl>
+	<copyright>MIT</copyright>
+	<license>MIT</license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.0.2</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>Create an article programatically</description>
+
+	<update> <!-- Runs on update; New since J2.5 -->
+	</update>
+
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+		to copy FROM in the package to install therefore files copied
+		in this section are copied from /site/ in the package -->
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>nawakaarticle.php</filename>
+		<filename>flickity.min.css</filename>
+		<filename>flickity.pkgd.min.js</filename>
+	</files>
+
+  <administration>
+	</administration>
+
+</extension>
