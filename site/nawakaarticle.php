@@ -20,7 +20,7 @@ foreach($result as $item) {
   $lead = $item["elements"]["lead"]["value"];
   $text = $item["elements"]["tekst"]["value"];
   $youtube = $item["elements"]["youtube_embed_url"]["value"];
-  $flickr = $item["elements"]["flickr_embed_url"]["value"];
+  $flickr = $item["elements"]["flickr_embed_id"]["value"];
   $embed = $item["elements"]["embed_url"]["value"];
 
   echo $embed;
