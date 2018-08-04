@@ -20,7 +20,7 @@ foreach($result as $item) {
   $lead = $item["elements"]["lead"]["value"];
   $text = $item["elements"]["tekst"]["value"];
   $youtube = $item["elements"]["youtube_embed_url"]["value"];
-  $flickr = $item["elements"]["flickr_embed_id"]["value"];
+  // $flickr = $item["elements"]["flickr_embed_id"]["value"];
   $embed = $item["elements"]["embed_url"]["value"];
 
   echo $embed;
@@ -37,7 +37,7 @@ foreach($result as $item) {
     array_push($authors, $author["name"]);
   }
   $authors = implode(", ", $authors);
-
+  
   // Check if a lead photo has been specified and if it exists
   if (!empty($item["elements"]["lead_foto"]["value"][0])
   && !file_exists(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"])) {
@@ -84,9 +84,9 @@ foreach($result as $item) {
     $extra_html .= '</div>';
   }
   
-  if ($flickr) {
-    $extra_html .= '<iframe id="flickr-iframe" style="position: relative; top: 0; left: 0; width: 100%; height: 800px; max-height: 800px;" src="https://flickrembed.com/cms_embed.php?source=flickr&layout=responsive&'.$flickr.'&sort=0&by=album&theme=tiles_justified&scale=fit&limit=300&skin=default&autoplay=true" scrolling="yes" frameborder="0" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe><script type="text/javascript">function showpics(){var a=$("#box").val();$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+a+"&tagmode=any&format=json&jsoncallback=?",function(a){$("#images").hide().html(a).fadeIn("fast"),$.each(a.items,function(a,e){$("<img/>").attr("src",e.media.m).appendTo("#images")})})}</script>';
-  }
+//   if ($flickr) {
+//     $extra_html .= '<iframe id="flickr-iframe" style="position: relative; top: 0; left: 0; width: 100%; height: 800px; max-height: 800px;" src="https://flickrembed.com/cms_embed.php?source=flickr&layout=responsive&'.$flickr.'&sort=0&by=album&theme=tiles_justified&scale=fit&limit=300&skin=default&autoplay=true" scrolling="yes" frameborder="0" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe><script type="text/javascript">function showpics(){var a=$("#box").val();$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+a+"&tagmode=any&format=json&jsoncallback=?",function(a){$("#images").hide().html(a).fadeIn("fast"),$.each(a.items,function(a,e){$("<img/>").attr("src",e.media.m).appendTo("#images")})})}</script>';
+//   }
 
   // Check if article already exists
   $query = $db->getQuery(true);
