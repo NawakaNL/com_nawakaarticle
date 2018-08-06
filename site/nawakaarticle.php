@@ -17,6 +17,9 @@ curl_close($ch);
 foreach($result as $item) {
   $article_id = $item["system"]["id"];
   $title = $item["elements"]["artikeltitel"]["value"];
+  $category_name = preg_replace("/\([^)]+\)/","", $title);
+  $title = preg_filter("/[^(]*\(([^)]+)\)[^()]*/", "$1", $title);
+
   $lead = $item["elements"]["lead"]["value"];
   $text = $item["elements"]["tekst"]["value"];
   $youtube = $item["elements"]["youtube_embed_url"]["value"];
@@ -132,7 +135,32 @@ foreach($result as $item) {
     $article->alias            = JFilterOutput::stringURLSafe($title);
     $article->introtext        = $lead;
     $article->fulltext         = $text . $extra_html;
-    $article->catid            = 9;
+    $cat_id = 19;
+
+    switch (true){
+       case stristr($category_name,'stuurlui'):
+          include 20;
+          break;
+       case stristr($category_name,'vis'):
+          include 21;
+          break;
+       case stristr($category_name,'reilen'):
+          include 27;
+          break;
+       case stristr($category_name,'onderste'):
+          include 28;
+          break;
+       case stristr($category_name,'zee'):
+          include 29;
+          break;
+       case stristr($category_name,'kanawa'):
+          include 30;
+          break;
+       case stristr($category_name,'english'):
+          include 25;
+          break;
+    }
+    $article->catid            = $cat_id;
     $article->created          = JFactory::getDate()->toSQL();
     $article->created_by_alias = $authors;
     $article->images          = '{"image_intro":"'.$lead_url.'","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"'.$full_lead_url.'", "float_fulltext":"none","image_fulltext_alt":"","image_fulltext_caption":""}';
