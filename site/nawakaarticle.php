@@ -27,6 +27,7 @@ foreach($result as $item) {
   $article_id = $item["system"]["id"];
   $title = $item["elements"]["artikeltitel"]["value"];
   $category_name = get_string_between($title, "[", "]");
+  print($category_name);
   $title = preg_replace('`\[[^\]]*\]`','', $title);
 
   $lead = $item["elements"]["lead"]["value"];
