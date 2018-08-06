@@ -14,11 +14,20 @@ curl_setopt($ch, CURLOPT_URL,$url);
 $result= json_decode(curl_exec($ch), true)["items"];
 curl_close($ch);
 
+function get_string_between($string, $start, $end){
+        $string = " ".$string;
+       $ini = strpos($string,$start);
+        if ($ini == 0) return "";
+        $ini += strlen($start);
+         $len = strpos($string,$end,$ini) - $ini;
+        return substr($string,$ini,$len);
+}
+
 foreach($result as $item) {
   $article_id = $item["system"]["id"];
   $title = $item["elements"]["artikeltitel"]["value"];
-  $category_name = preg_filter("/[^(]*\(([^)]+)\)[^()]*/", "$1", $title);
-  $title = preg_replace("/\([^)]+\)/","", $title);
+  $category_name = get_string_between($title, "[", "]");
+  $title = preg_replace('`\[[^\]]*\]`','', $title);
 
   $lead = $item["elements"]["lead"]["value"];
   $text = $item["elements"]["tekst"]["value"];
