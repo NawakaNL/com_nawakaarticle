@@ -122,6 +122,32 @@ foreach($result as $item) {
     $article->introtext        = $lead;
     $article->fulltext         = $text . $extra_html;
     $article->created_by_alias = $authors;
+    $cat_id = 19;
+
+    switch (true){
+       case stristr($category_name,'stuurlui'):
+          $cat_id = 20;
+          break;
+       case stristr($category_name,'vis'):
+          $cat_id = 21;
+          break;
+       case stristr($category_name,'reilen'):
+          $cat_id = 27;
+          break;
+       case stristr($category_name,'onderste'):
+          $cat_id = 28;
+          break;
+       case stristr($category_name,'zee'):
+          $cat_id = 29;
+          break;
+       case stristr($category_name,'kanawa'):
+          $cat_id = 30;
+          break;
+       case stristr($category_name,'english'):
+          $cat_id = 25;
+          break;
+    }
+    $article->catid            = $cat_id;
     $article->images          = '{"image_intro":"'.$lead_url.'","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"'.$full_lead_url.'", "float_fulltext":"none","image_fulltext_alt":"","image_fulltext_caption":""}';
     $article->access           = 1;
     $article->metadata         = '{"page_title":"","rights":"'.$photographers.'", "author":"'.$authors.'","robots":"", "xreference": "'.$article_id.'"}';
