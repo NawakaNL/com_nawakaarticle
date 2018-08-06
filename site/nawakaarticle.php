@@ -26,7 +26,7 @@ function get_string_between($string, $start, $end){
 foreach($result as $item) {
   $article_id = $item["system"]["id"];
   $title = $item["elements"]["artikeltitel"]["value"];
-  $category_name = get_string_between($title, "[", "]");
+  $category_name = $item["elements"]["welke_categorie_"]["value"][0]["codename"];
   print($category_name);
   $title = preg_replace('`\[[^\]]*\]`','', $title);
 
@@ -154,25 +154,25 @@ foreach($result as $item) {
 
     switch (true){
        case stristr($category_name,'stuurlui'):
-          include 20;
+          $cat_id = 20;
           break;
        case stristr($category_name,'vis'):
-          include 21;
+          $cat_id = 21;
           break;
        case stristr($category_name,'reilen'):
-          include 27;
+          $cat_id = 27;
           break;
        case stristr($category_name,'onderste'):
-          include 28;
+          $cat_id = 28;
           break;
        case stristr($category_name,'zee'):
-          include 29;
+          $cat_id = 29;
           break;
        case stristr($category_name,'kanawa'):
-          include 30;
+          $cat_id = 30;
           break;
        case stristr($category_name,'english'):
-          include 25;
+          $cat_id = 25;
           break;
     }
     $article->catid            = $cat_id;
