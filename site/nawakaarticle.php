@@ -53,7 +53,7 @@ foreach($result as $item) {
 
   // Check if a lead photo has been specified and if it exists
   if (!empty($item["elements"]["lead_foto"]["value"][0])
-  && !file_exists(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"])) {
+  && (!file_exists(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"]) || filesize(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"]) == 0)) {
     // Lead photo does not exist, upload a new one.
    try {
           file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
@@ -68,7 +68,7 @@ foreach($result as $item) {
   foreach ($item["elements"]["foto_s"]["value"] as $photo) {
     if (!empty($photo)) {
       array_push($photos, $photo["name"]);
-      if (!file_exists(JPATH_BASE.'/images/articles/'.$photo["name"])) {
+      if (!file_exists(JPATH_BASE.'/images/articles/'.$photo["name"]) || filesize(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"]) == 0) {
         // Lead photo does not exist, upload a new one.
         try {
           file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
