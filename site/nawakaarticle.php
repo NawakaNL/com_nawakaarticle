@@ -27,7 +27,6 @@ foreach($result as $item) {
   $article_id = $item["system"]["id"];
   $title = $item["elements"]["artikeltitel"]["value"];
   $category_name = $item["elements"]["welke_categorie_"]["value"][0]["codename"];
-  print($category_name);
   $title = preg_replace('`\[[^\]]*\]`','', $title);
 
   $lead = $item["elements"]["lead"]["value"];
@@ -51,8 +50,9 @@ foreach($result as $item) {
   }
   $authors = implode(", ", $authors);
 
-
- file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
+  print_r($photo);  
+  print("</br>");
+  file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
           fopen($photo["url"], 'r'));
 
   // Check if other photos have been specified and if they exist.
