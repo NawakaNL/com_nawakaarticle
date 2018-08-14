@@ -51,32 +51,19 @@ foreach($result as $item) {
   }
   $authors = implode(", ", $authors);
 
-  // Check if a lead photo has been specified and if it exists
-  if (!empty($item["elements"]["lead_foto"]["value"][0])
-  && (!file_exists(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"]) || filesize(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"]) == 0)) {
-    // Lead photo does not exist, upload a new one.
-   try {
-          file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
+
+ file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
           fopen($photo["url"], 'r'));
-        } catch (Exception $e) {
-          echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-  }
 
   // Check if other photos have been specified and if they exist.
   $photos = array();
   foreach ($item["elements"]["foto_s"]["value"] as $photo) {
     if (!empty($photo)) {
       array_push($photos, $photo["name"]);
-      if (!file_exists(JPATH_BASE.'/images/articles/'.$photo["name"]) || filesize(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"]) == 0) {
-        // Lead photo does not exist, upload a new one.
-        try {
-          file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
+     
+      file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
           fopen($photo["url"], 'r'));
-        } catch (Exception $e) {
-          echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-      }
+     
     }
   }
 
