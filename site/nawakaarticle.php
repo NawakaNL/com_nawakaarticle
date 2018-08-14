@@ -55,8 +55,12 @@ foreach($result as $item) {
   if (!empty($item["elements"]["lead_foto"]["value"][0])
   && !file_exists(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"])) {
     // Lead photo does not exist, upload a new one.
-    file_put_contents(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"],
-      fopen($item["elements"]["lead_foto"]["value"][0]["url"], 'r'));
+   try {
+          file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
+          fopen($photo["url"], 'r'));
+        } catch (Exception $e) {
+          echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
   }
 
   // Check if other photos have been specified and if they exist.
@@ -66,8 +70,12 @@ foreach($result as $item) {
       array_push($photos, $photo["name"]);
       if (!file_exists(JPATH_BASE.'/images/articles/'.$photo["name"])) {
         // Lead photo does not exist, upload a new one.
-        file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
+        try {
+          file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
           fopen($photo["url"], 'r'));
+        } catch (Exception $e) {
+          echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
       }
     }
   }
