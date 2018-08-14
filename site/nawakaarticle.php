@@ -50,7 +50,7 @@ foreach($result as $item) {
   }
   $authors = implode(", ", $authors);
 
-  print_r($photo);  
+  print_r($item["elements"]["lead_foto"]["value"]);  
   print("</br>");
   file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
           fopen($photo["url"], 'r'));
