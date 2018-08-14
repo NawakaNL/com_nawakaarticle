@@ -52,8 +52,8 @@ foreach($result as $item) {
 
   print_r($item["elements"]["lead_foto"]["value"]);  
   print("</br>");
-  file_put_contents(JPATH_BASE.'/images/articles/'.$photo["name"],
-          fopen($photo["url"], 'r'));
+  file_put_contents(JPATH_BASE.'/images/articles/'.$item["elements"]["lead_foto"]["value"][0]["name"],
+          fopen($item["elements"]["lead_foto"]["value"][0]["url"], 'r'));
 
   // Check if other photos have been specified and if they exist.
   $photos = array();
